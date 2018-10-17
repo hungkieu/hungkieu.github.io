@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Drag Drop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+    #box {
+      display: inline-block;
+      width: 200px;
+      height: 200px;
+      background: black;
+    }
+    .w {
+      display: flex;
+      width: 250px;
+      height: 250px;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid black;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="w">
+      <div id="box" draggable="true"></div>
+    </div>
+    <div class="w"></div>
+    <div class="w"></div>
+    <div class="w"></div>
+  </div>
+</body>
+<script>
+  document.getElementById('box').addEventListener('dragstart', dragStart)
+
+  for(const w of document.getElementsByClassName('w')) {
+    w.addEventListener('dragenter', dragEnter)
+    w.addEventListener('dragleave', dragLeave)
+    w.addEventListener('dragover', dragOver)
+    w.addEventListener('drop', drop)
+    w.addEventListener('dragend', dragEnd)
+  }
+
+  function dragStart(e) {
+    e.dataTransfer.dropEffect = "move"
+    e.dataTransfer.setData('text', e.target.id);
+  }
+
+  function dragEnd(e) {
+    this.style = ""
+  }
+
+  function dragEnter(e) {
+    e.preventDefault();
+    this.style = "border: 2px dashed red"
+  }
+
+  function dragLeave(e) {
+    this.style = ""
+  }
+
+  function dragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move"
+  }
+
+  function drop(e) {
+    e.preventDefault();
+    var id = e.dataTransfer.getData('text');
+    var dom = document.getElementById(id);
+    this.appendChild(dom);
+  }
+</script>
+</html>
