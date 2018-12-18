@@ -112,7 +112,7 @@ var app = new Vue({
   },
   methods: {
     fetch_data() {
-      let url = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/' + this.city_key;
+      let url = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/' + this.city_key;
       let param = '?language=vi&apikey=' + apikey;
       fetch(url + param)
         .then(res => {
