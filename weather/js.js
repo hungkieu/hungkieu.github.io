@@ -55,6 +55,12 @@ var app = new Vue({
   data: {
     city_key: cities[0],
     days: [],
+    cities: [
+      {value: 353412, name: "Hà Nội"},
+      {value: 352954, name: "Đà Nẵng"},
+      {value: 353981, name: "TP Hồ Chí Minh"},
+    ],
+    load: true,
   },
   computed: {
     city_name() {
@@ -107,6 +113,12 @@ var app = new Vue({
       }
     }
   },
+  watch: {
+    city_key() {
+      this.load = true;
+      this.fetch_data();
+    }
+  },
   mounted() {
     this.fetch_data();
   },
@@ -119,7 +131,10 @@ var app = new Vue({
           return res.json();
         })
         .then(res => {
-          this.days = res.DailyForecasts;
+          setTimeout(() => {
+            this.load = false
+            this.days = res.DailyForecasts;
+          }, 5000);
         })
         .catch(res => {
           alert('Tải dữ liệu không thành công');
@@ -128,7 +143,7 @@ var app = new Vue({
 
     FtoC(f) {
       return Math.round((f - 32) * 5 / 9);
-    }
+    },
   },
 })
 

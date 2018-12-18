@@ -56,6 +56,16 @@
           ></weather-day>
       </div>
     </div>
+
+    <div class="cities">
+      <div v-for="(city, index) in cities" :key="index" :class="{city: true, active_city: city_key == city.value}" @click="city_key = city.value" >
+        {{ city.name }}
+      </div>
+    </div>
+
+    <div class="loading" v-if="load">
+      Đang tải ...
+    </div>
   </div>
   <script src="../js/vue.min.js"></script>
   <script src="js.js"></script>
