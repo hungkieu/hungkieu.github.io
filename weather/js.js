@@ -126,7 +126,7 @@ var app = new Vue({
     fetch_data() {
       let url = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/' + this.city_key;
       let param = '?language=vi&apikey=' + apikey;
-      fetch(url + param)
+      fetch(url + param, {mode: 'no-cors'})
         .then(res => {
           return res.json();
         })
