@@ -21,8 +21,8 @@ Vue.component('weather-day', {
         if([15,16,17].includes(icon)) wicon = 'svg/5.svg';
       } else {
         let icon = this.day.Night.Icon;
-        if([33, 34].includes(icon)) return 'svg/10.svg';
-        if([35, 36, 37, 38].includes(icon)) return 'svg/11.svg';
+        if([33, 34].includes(icon)) wicon = 'svg/10.svg';
+        if([35, 36, 37, 38].includes(icon)) wicon = 'svg/11.svg';
         if([7,8,11].includes(icon)) wicon = 'svg/3.svg';
         if([12,13,14,18].includes(icon)) wicon = 'svg/4.svg';
       }
@@ -126,15 +126,12 @@ var app = new Vue({
     fetch_data() {
       let url = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/' + this.city_key;
       let param = '?language=vi&apikey=' + apikey;
-      fetch(url + param, {mode: 'no-cors'})
+      fetch(url + param)
         .then(res => {
           return res.json();
         })
         .then(res => {
-          setTimeout(() => {
-            this.load = false
-            this.days = res.DailyForecasts;
-          }, 5000);
+          this.days = res.DailyForecasts;
         })
         .catch(res => {
           alert('Tải dữ liệu không thành công');
