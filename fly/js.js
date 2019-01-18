@@ -1,10 +1,11 @@
 var zombies = [];
 var player;
 var bullets = [];
-var gunshoot;
+var gunshoot, boss;
 
 function preload() {
   gunshoot = loadSound('gunshoot.mp3');
+  boss = loadSound('boss.m4a');
 }
 
 function setup() {
@@ -13,10 +14,9 @@ function setup() {
   createCanvas(document.body.clientWidth, document.body.clientHeight)
   player = new Player(width / 2, height / 2);
   for(let i = 0; i < 10; i++) {
-
     zombies.push(newZombie());
   }
-
+  boss.loop();
 }
 
 function draw() {
