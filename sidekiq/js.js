@@ -1,30 +1,3 @@
-SideKiqPage = {
-  loadScript() {
-    $.getScript("https://www.gstatic.com/firebasejs/5.9.3/firebase.js");
-    $.getScript("https://code.jquery.com/jquery-3.3.1.min.js");
-    $.getScript("https://cdnjs.com/libraries/Chart.js");
-    $.getScript("https://hungkieu.github.io/sidekiq/countup.js");
-    loadPage();
-  },
-
-  get() {
-    let processed = document.querySelector('.processed .count').textContent;
-    processed = parseInt(processed.replace(/,/g, ""));
-
-    let enqueued = document.querySelector('.enqueued .count').textContent;
-    enqueued = parseInt(enqueued.replace(/,/g, ""));
-
-    return { processed, enqueued };
-  },
-
-  update(processed, enqueued) {
-    var index = reports.length;
-    var created_at = new Date().getTime();
-    var new_reportref = database.ref("reports/" + index);
-    return new_reportref.set({processed, enqueued, created_at});
-  }
-}
-
 function loadPage() {
   var database = firebase.database();
   var rootref = database.ref("/");
@@ -43,6 +16,7 @@ function loadPage() {
       };
       let count = new CountUp(el, end, options);
       count.start();
+      return count;
     }
 
     function format_time(timestamp) {
@@ -64,19 +38,25 @@ function loadPage() {
       $('#pre_p_t').text(format_time(previous_last_report.created_at));
       $('#pre_q_t').text(format_time(previous_last_report.created_at));
 
-      let processed_count = parseInt($('#Processed-count').text());
-      count_start_to_end('Processed-count', processed_count, processed);
+      $('#Processed-count').text(processed);
+      $('#Queued-count').text(enqueued);
 
-      let enqueued_count = parseInt($('#Queued-count').text());
-      count_start_to_end('Queued-count', enqueued_count, enqueued);
-
-      let pre_processed_count = parseInt($('#Processed-count-p').text());
       let compare_processed = processed - pre_processed;
-      count_start_to_end('Processed-count-p', pre_processed_count, compare_processed);
+      $('#Processed-count-p').text(compare_processed);
 
-      let pre_enqueued_count = parseInt($('#Queued-count').text());
       let compare_enqueued = enqueued - pre_enqueued;
-      count_start_to_end('Queued-count-p', pre_enqueued_count, compare_enqueued);
+      $('#Queued-count-p').text(compare_enqueued);
+
+      $('#table-time').html("");
+      for (let i = reports.length; i >= 0; i--) {
+        if (i % 60 == 0 && i != 0) {
+          let tr = $(`<tr></tr>`);
+          let r = reports[i];
+          let tds = $(`<td>${format_time(r.created_at)}</td><td>${r.processed}</td><td>${r.enqueued}</td>`);
+          tr.append(tds);
+          $('#table-time').append(tr);
+        }
+      }
     });
   });
 }

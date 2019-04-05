@@ -50,6 +50,28 @@
       color: rgb(255, 122, 117);
       font-size: 3rem;
     }
+
+    .table {
+      box-sizing: border-box;
+      padding: 4rem;
+    }
+
+    .table table {
+      background: white;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: rgb(255, 122, 117);
+      color: white;
+    }
+
+    td, th {
+      text-align: center;
+      padding: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 <body>
@@ -60,7 +82,7 @@
       <div class="count" id="Processed-count">0</div>
     </div>
     <div class="card">
-      <div class="title">Enquued</div>
+      <div class="title">Enqueued</div>
       <div class="count" id="Queued-count">0</div>
     </div>
     <div class="card">
@@ -71,6 +93,18 @@
       <div class="title">Compared to the previous update: <span id="pre_q_t"></span></div>
       <div class="count" id="Queued-count-p">0</div>
     </div>
+  </div>
+
+  <div class="table">
+    <table>
+      <thead>
+        <th>Time</th>
+        <th>Processed</th>
+        <th>Enqueued</th>
+      </thead>
+      <tbody id="table-time">
+      </tbody>
+    </table>
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
