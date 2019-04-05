@@ -3,12 +3,13 @@ function load_js(url) {
   var script = document.createElement('script');
   script.src = url;
   head.appendChild(script);
+  return script;
 }
 
 window.SideKiqPage = {
   loadScript() {
-    load_js("https://www.gstatic.com/firebasejs/5.9.3/firebase.js");
-    window.addEventListener('load', function () {
+    script = load_js("https://www.gstatic.com/firebasejs/5.9.3/firebase.js");
+    script.addEventListener('load', function () {
       var config = {
         apiKey: "AIzaSyAV55iE69n_GXKgRW2ZkvxTqbpobG60jzo",
         authDomain: "hungk-7f1fa.firebaseapp.com",
