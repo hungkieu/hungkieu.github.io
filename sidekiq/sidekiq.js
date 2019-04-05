@@ -21,10 +21,10 @@ window.SideKiqPage = {
       firebase.initializeApp(config);
 
       window.SideKiqPage.database = firebase.database();
-      window.SideKiqPage.rootref = database.ref("/");
-      window.SideKiqPage.reportsref = database.ref("/reports");
+      window.SideKiqPage.rootref = window.SideKiqPage.database.ref("/");
+      window.SideKiqPage.reportsref = window.SideKiqPage.database.ref("/reports");
       window.SideKiqPage.reports;
-      reportsref.on('value', function (snap) {
+      window.SideKiqPage.reportsref.on('value', function (snap) {
         window.SideKiqPage.reports = snap.val();
       });
     });
