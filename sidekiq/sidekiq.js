@@ -19,12 +19,12 @@ window.SideKiqPage = {
       };
       firebase.initializeApp(config);
 
-      SideKiqPage.database = firebase.database();
-      SideKiqPage.rootref = database.ref("/");
-      SideKiqPage.reportsref = database.ref("/reports");
-      SideKiqPage.reports;
+      window.SideKiqPage.database = firebase.database();
+      window.SideKiqPage.rootref = database.ref("/");
+      window.SideKiqPage.reportsref = database.ref("/reports");
+      window.SideKiqPage.reports;
       reportsref.on('value', function (snap) {
-        SideKiqPage.reports = snap.val();
+        window.SideKiqPage.reports = snap.val();
       });
     });
   },
@@ -43,9 +43,9 @@ window.SideKiqPage = {
   },
 
   update(processed, enqueued) {
-    var index = SideKiqPage.reports.length;
+    var index = window.SideKiqPage.reports.length;
     var created_at = new Date().getTime();
-    var new_reportref = SideKiqPage.database.ref("reports/" + index);
+    var new_reportref = window.SideKiqPage.database.ref("reports/" + index);
     return new_reportref.set({
       processed,
       enqueued,
