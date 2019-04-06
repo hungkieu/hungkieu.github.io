@@ -21,7 +21,7 @@ function loadPage() {
 
     function format_time(timestamp) {
       d = new Date(timestamp);
-      return `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} - ${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`
+      return `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} - ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`
     }
 
     reportsref.on('value', function (snap) {
