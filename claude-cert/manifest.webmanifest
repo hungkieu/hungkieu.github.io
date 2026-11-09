@@ -1,0 +1,18 @@
+{
+  "name": "Claude Cert",
+  "short_name": "Claude Cert",
+  "description": "Ôn thi chứng chỉ Claude Code developer",
+  "lang": "vi",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#12332f",
+  "background_color": "#12332f",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
