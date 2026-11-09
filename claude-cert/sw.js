@@ -9,7 +9,8 @@ self.addEventListener('fetch', (e) => {
   const req = e.request
   if (req.method !== 'GET' || !req.url.startsWith(self.location.origin)) return
   e.respondWith(
-    fetch(req)
+    // Pages sends max-age=600: revalidate the page itself so a new deploy shows on the next open, not 10 min later.
+    fetch(req, req.mode === 'navigate' ? { cache: 'no-cache' } : {})
       .then((res) => {
         if (res.ok) {
           const copy = res.clone()
